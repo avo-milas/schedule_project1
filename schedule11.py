@@ -40,4 +40,4 @@ if maxPairs[day] >= pair + 1:
         if (pair + 1, day) in m:
             ans2 = data[m]
     print(f'{ans2[0]}\n{ans2[1][day]}\n{ans2[2]}\n{ans2[3]}\n код: {ans2[4]}')
-//чекпоинт
+# чекпоинт2
