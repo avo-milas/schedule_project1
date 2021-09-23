@@ -22,22 +22,33 @@ data = {((1, 'пн'), (2, 'вт')): ['Русский язык', {'пн': '10:00-
                       'https://vk.com/away.php?to=https%3A%2F%2Fus04web.zoom.us%2Fj%2F77144787511%3Fpwd%3DMENKVFBwNXU&cc_key=',
                       '7gxDG9'],
         ((5, 'пн'), 'a'): ['Инглиш (доп)', {'пн': '18:00-19:30'}, 'Соколова Лия', 'https://vk.com/away.php?to=https%3A%2F%2Fus02web.zoom.us%2Fj%2F9713559364&cc_key=', '-']}
-pairs = {(590, 690): 1, (691, 790): 2, (791, 920): 3, (921, 1020): 4, (1021, 1300): 5}
-maxPairs = {'пн': 4, 'вт': 4, 'ср': 5, 'чт': 2, 'пт': 4}
+pairs = {(0, 690): 1, (691, 790): 2, (791, 920): 3, (921, 1020): 4, (1021, 1300): 5}
+maxPairs = {'пн': 5, 'вт': 4, 'ср': 5, 'чт': 2, 'пт': 4}
 day, hours, minutes = input().split()
 time = int(hours) * 60 + int(minutes)
 ans = ['-', '-', '-', '-', '-']
+flag = 1
 for i in pairs.keys():
     if i[0] <= time <= i[1]:
         pair = pairs[i]
-for j in data.keys():
-    if (pair, day) in j:
-        ans = data[j]
-print(f'{ans[0]}\n{ans[1][day]}\n{ans[2]}\n{ans[3]}\n код: {ans[4]}')
-if maxPairs[day] >= pair + 1:
-    print('--Следующая пара--')
-    for m in data.keys():
-        if (pair + 1, day) in m:
-            ans2 = data[m]
-    print(f'{ans2[0]}\n{ans2[1][day]}\n{ans2[2]}\n{ans2[3]}\n код: {ans2[4]}')
-
+        break
+else:
+    pair = 0
+    print('На сегодня все :)')
+if pair != 0:
+    for j in data.keys():
+        if maxPairs[day] >= pair and (pair, day) in j:
+            ans = data[j]
+            break
+    else:
+        flag = 0
+        print('На сегодня все :)')
+    if flag:
+        print(f'{ans[0]}\n{ans[1][day]}\n{ans[2]}\n{ans[3]}\n код: {ans[4]}')
+        if maxPairs[day] >= pair + 1:
+            print('\n', '--Следующая пара--', '\n')
+            for m in data.keys():
+                if (pair + 1, day) in m:
+                    ans2 = data[m]
+            print(f'{ans2[0]}\n{ans2[1][day]}\n{ans2[2]}\n{ans2[3]}\n код: {ans2[4]}')
+# correctly
